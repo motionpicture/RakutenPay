@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 
 /**
  * DigitalSignatue
- * @exports
+ * @exports DigitalSignatue
  */
 export class DigitalSignatue {
     public key: any;
