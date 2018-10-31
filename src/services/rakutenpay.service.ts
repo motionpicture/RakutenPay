@@ -1,3 +1,4 @@
+import { DigitalSignatue } from '../digital.signature';
 import * as factory from '../factories/rakutenpay.factory';
 import { OrderStepBase } from '../models/OrderStepBase';
 import { Service } from '../service';
@@ -10,6 +11,8 @@ import { Service } from '../service';
  */
 
 export class RakutenPayService extends Service {
+    public signature: string;
+
     private authMethod: number = factory.authMethod.HMAC_SHA1;
 
     public async createUrl () {
@@ -22,12 +25,21 @@ export class RakutenPayService extends Service {
         return this.authMethod;
     }
 
-    public async initialize (orderStep: OrderStepBase) {
+    public async initialize (key: string, orderStep: OrderStepBase) {
         const orderInfo: factory.IDynamicProduct = orderStep.getDinamicProduct();
 
         await this.createUrl();
         await this.clearXml();
         await this.saveXml(orderInfo);
         await this.setCheckout();
+        await this.createSignature(key);
+    }
+
+    public async createSignature (key: string) {
+        const digitalSignatue = new DigitalSignatue(key);
+
+        if (this.xml.length > 0) {
+            this.signature = digitalSignatue.createtHmac(this.xml);
+        }
     }
 }
