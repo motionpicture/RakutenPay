@@ -1,4 +1,5 @@
 import * as factory from '../factories/rakutenpay.factory';
+import { OrderStepBase } from '../models/OrderStepBase';
 import { Service } from '../service';
 
 /**
@@ -19,5 +20,14 @@ export class RakutenPayService extends Service {
 
     public async getAuthMethod () {
         return this.authMethod;
+    }
+
+    public async initialize (orderStep: OrderStepBase) {
+        const orderInfo: factory.IDynamicProduct = orderStep.getDinamicProduct();
+
+        await this.createUrl();
+        await this.clearXml();
+        await this.saveXml(orderInfo);
+        await this.setCheckout();
     }
 }
