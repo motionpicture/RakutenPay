@@ -13,13 +13,17 @@ const debug = createDebug('rakuten-pay:service');
  */
 export class Service {
     public xml: string;
+    public checkout: string;
+    public url: string;
     private savePath: string;
 
     // 楽天ペイのエンドポイントは固定
     private ENDPOINT: string = 'https://my.checkout.rakuten.co.jp/myc/cdodl';
 
     public async createUrl(uri: string) {
-        return this.ENDPOINT + uri;
+        this.url = this.ENDPOINT + uri;
+
+        return this.url;
     }
 
     public async toXml(json: object) {
@@ -53,7 +57,7 @@ export class Service {
         return true;
     }
 
-    public async getCheckout() {
+    public async setCheckout() {
         const checout = '';
         if (this.xml.length > 0) {
             const filePath = this.getSavePath();
@@ -64,13 +68,16 @@ export class Service {
                         debug('read error...', err.message);
                         reject(err);
                     } else {
+                        this.checkout = data;
                         resolve(data);
                     }
                 });
             });
         }
 
-        return checout;
+        this.checkout = checout;
+
+        return this.checkout;
     }
 
     private getSavePath () {

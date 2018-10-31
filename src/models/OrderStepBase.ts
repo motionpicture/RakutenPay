@@ -11,7 +11,7 @@ export class OrderStepBase extends BaseIn {
     public orderTotalFee: number;
     public items: factory.IItem[];
 
-    protected getDinamicProduct (): factory.IDynamicProduct {
+    public getDinamicProduct (): factory.IDynamicProduct {
         return {
             orderItemInfo: this.getOrderItemInfo()
         };
