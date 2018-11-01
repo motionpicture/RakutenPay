@@ -30,7 +30,7 @@ export class RakutenPayService extends Service {
 
         await this.createUrl();
         await this.clearXml();
-        await this.saveXml(orderInfo);
+        await this.toXml(orderInfo);
         await this.setCheckout();
         await this.createSignature(key);
     }
