@@ -22,14 +22,10 @@ export abstract class BaseIn {
     }
 
     protected setIsTmode () {
-        if (typeof process.env.NODE_ENV === undefined) {
-            this.isTmode = factory.isTMode.ProductionMode;
-        }
+        this.isTmode =  factory.isTMode.ProductionMode;
 
         if (process.env.NODE_ENV === 'dev') {
             this.isTmode =  factory.isTMode.TestMode;
         }
-
-        this.isTmode =  factory.isTMode.ProductionMode;
     }
 }
