@@ -83,7 +83,7 @@ export interface IOrderItemInfo {
     // 商品合計金額(税込)
     orderTotalFee: number;
     // 商品情報親属性
-    itemsInfo: [];
+    itemsInfo: Array<{}>;
 }
 
 // 商品

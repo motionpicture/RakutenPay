@@ -9,7 +9,7 @@ export class OrderStepBase extends BaseIn {
     public orderFailedUrl: string;
     public orderCartId: string;
     public orderTotalFee: number;
-    public items: factory.IItems;
+    public items: Array<{}>;
 
     public getDinamicProduct (): factory.IDynamicProduct {
         return {
