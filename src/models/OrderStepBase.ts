@@ -9,15 +9,16 @@ export class OrderStepBase extends BaseIn {
     public orderFailedUrl: string;
     public orderCartId: string;
     public orderTotalFee: number;
-    public items: Array<{}>;
+    public itemInfo: factory.IItemsInfo;
+    public items: factory.IItem[];
 
     public getDinamicProduct (): factory.IDynamicProduct {
         return {
-            orderItemInfo: this.getOrderItemInfo()
+            orderItemsInfo: this.getOrderItemsInfo()
         };
     }
 
-    protected getOrderItemInfo (): factory.IOrderItemInfo {
+    protected getOrderItemsInfo (): factory.IOrderItemsInfo {
         return {
             serviceId: this.serviceId,
             authMethod: this.authMethod,
@@ -26,11 +27,11 @@ export class OrderStepBase extends BaseIn {
             orderFailedUrl: this.orderFailedUrl,
             orderCartId: this.orderCartId,
             orderTotalFee: this.orderTotalFee,
-            itemsInfo: this.getItems()
+            itemsInfo: this.getItemsInfo()
         };
     }
 
-    protected getItems () {
-        return this.items;
+    protected getItemsInfo (): factory.IItemsInfo {
+        return { item: this.items };
     }
 }

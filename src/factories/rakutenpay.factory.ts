@@ -63,11 +63,11 @@ export enum paymentStatus {
  */
 export interface IDynamicProduct {
     // 注文情報
-    orderItemInfo: IOrderItemInfo;
+    orderItemsInfo: IOrderItemsInfo;
 }
 
 // 注文情報
-export interface IOrderItemInfo {
+export interface IOrderItemsInfo {
     // サービスID
     serviceId: string;
     // 暗号化方式
@@ -83,7 +83,11 @@ export interface IOrderItemInfo {
     // 商品合計金額(税込)
     orderTotalFee: number;
     // 商品情報親属性
-    itemsInfo: Array<{}>;
+    itemsInfo: IItemsInfo;
+}
+
+export interface IItemsInfo {
+    item: IItem[];
 }
 
 // 商品
