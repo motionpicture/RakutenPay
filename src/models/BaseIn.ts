@@ -24,7 +24,7 @@ export abstract class BaseIn {
     protected setIsTmode () {
         this.isTmode =  factory.isTMode.ProductionMode;
 
-        if (process.env.NODE_ENV === 'dev') {
+        if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test') {
             this.isTmode =  factory.isTMode.TestMode;
         }
     }
